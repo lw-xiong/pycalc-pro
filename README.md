@@ -1,2 +1,2 @@
-# python-calculator-project
-A beginner-friendly Python calculator project with support for basic operations and future GUI expansion.
+# pycalc-pro
+A feature-rich command-line calculator written in Python — supports advanced math, sequences, and number theory with a modular menu system.
