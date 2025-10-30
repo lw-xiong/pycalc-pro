@@ -32,7 +32,7 @@ A feature-rich **command-line calculator** written in Python — supports **adva
 To get started with PyCalc Pro, clone the repository, install the dependencies, and run the main script. All the commands you need are in this single, convenient block:
 
 ```bash
-git clone [https://github.com/lw-xiong/pycalc-pro.git](https://github.com/lw-xiong/pycalc-pro.git)
+git clone https://github.com/lw-xiong/pycalc-pro.git
 cd pycalc-pro
 pip install -r requirements.txt
 python calculator.py
