@@ -8,11 +8,11 @@ A feature-rich **command-line calculator** written in Python — supports **adva
 
 | Basic Operations | Advanced Math |
 | :---: | :---: |
-| ![Basic Operations](img2.jpg) | ![Advanced Math](img3.jpg) |
+| ![Basic Operations](images/img2.jpg) | ![Advanced Math](images/img3.jpg) |
 
 | Sequences & Number Theory | Example Output |
 | :---: | :---: |
-| ![Sequences & Number Theory](img4.jpg) | ![Color-coded Output Example](img5.jpg) |
+| ![Sequences & Number Theory](images/img4.jpg) | ![Color-coded Output Example](images/img5.jpg) |
 
 ---
 
