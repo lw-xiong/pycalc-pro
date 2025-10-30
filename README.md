@@ -4,15 +4,17 @@ A feature-rich **command-line calculator** written in Python — supports **adva
 
 ---
 
-## 📸 Screenshots
+### Advanced Calculator Menus
 
-Here are some glimpses of PyCalc Pro in action:
+![Main Menu](img1.jpg)
 
-![Main Menu](img1.jpg) 
-![Basic Operations](img2.jpg) 
-![Advanced Math](img3.jpg) 
-![Sequences & Number Theory](img4.jpg) 
-![Color-coded Output Example](img5.jpg) 
+| Basic Operations | Advanced Math |
+| :---: | :---: |
+| ![Basic Operations](img2.jpg) | ![Advanced Math](img3.jpg) |
+
+| Sequences & Number Theory | Example Output |
+| :---: | :---: |
+| ![Sequences & Number Theory](img4.jpg) | ![Color-coded Output Example](img5.jpg) |
 
 ---
 
