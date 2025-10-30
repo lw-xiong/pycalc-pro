@@ -6,8 +6,6 @@ A feature-rich **command-line calculator** written in Python — supports **adva
 
 ### Advanced Calculator Menus
 
-![Main Menu](img1.jpg)
-
 | Basic Operations | Advanced Math |
 | :---: | :---: |
 | ![Basic Operations](img2.jpg) | ![Advanced Math](img3.jpg) |
