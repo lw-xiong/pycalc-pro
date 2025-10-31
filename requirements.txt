@@ -1,2 +1,4 @@
 colorama
 tabulate
+functools
+numba
