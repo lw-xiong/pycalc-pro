@@ -64,10 +64,13 @@ def is_prime(n):
     return True
 
 def prime_sequence(n):
-    seq, num = [], 2
+    if n == 0: return []
+    seq = [2]
+    num = 3
     while len(seq) < n:
-        if is_prime(num): seq.append(num)
-        num += 1
+        if is_prime(num):
+            seq.append(num)
+        num += 2
     return seq
 
 # =========================
@@ -192,4 +195,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
