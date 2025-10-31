@@ -16,7 +16,7 @@ A feature-rich **command-line calculator** written in Python — supports **adva
 
 ---
 
-## 🚀 Features
+## Features
 
 * Basic arithmetic operations (add, subtract, multiply, divide)
 * Advanced math (power, square roots, trigonometry, logarithms)
@@ -27,7 +27,7 @@ A feature-rich **command-line calculator** written in Python — supports **adva
 
 ---
 
-## 📦 Installation & Usage
+## Installation & Usage
 
 To get started with PyCalc Pro, clone the repository, install the dependencies, and run the main script. All the commands you need are in this single, convenient block:
 
