@@ -1,0 +1,28 @@
+[project]
+name = "pycalc-pro"
+version = "1.1.1"
+description = "PyCalc Pro – A modular Python CLI calculator for advanced math, sequences, and number theory."
+authors = [
+    { name = "Li Wen Xiong (李文雄)", email = "lwx.src@gmail.com" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "functools",
+    "colorama",
+    "numpy",
+    "numba",
+    "math",
+    "sys",
+    "time"
+]
+urls = { "Homepage" = "https://github.com/lw-xiong/pycalc-pro.git" }
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.classifiers]
+# Indicate license type generally, but point users to your LICENSE for the exact terms
+license = "MIT License (see LICENSE file for Modified terms)"
