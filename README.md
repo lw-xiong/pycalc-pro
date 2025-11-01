@@ -1,17 +1,17 @@
-# PyCalc Pro v1.1.0
+# PyCalc Pro v1.1.1
 
 A feature-rich **command-line calculator** written in Python — supports **advanced math**, **sequences**, and **number theory** with a modular menu system and colorful terminal interface.
 
 ---
 
 ## Version Notes
-v1.1.0 — October 2025
+v1.1.1 — October 2025
 
-* Major optimization pass with caching and NumPy integration
-* Improved Fibonacci and prime generation performance (up to 16× faster)
+* Project Structure Update: Moved community files to .github/ folder for cleaner organization
+* Packaging Ready: Added pyproject.toml for modern Python distribution
 * Cleaner CLI with responsive progress bars
-* Reduced clutter, safer large-number handling
-* Enhanced modular structure for future extensions
+* License Update: Modified MIT license terms
+* No Functional Changes: Calculator performance and features identical to v1.1.0
 
 ---
 
@@ -40,14 +40,19 @@ v1.1.0 — October 2025
 
 ## Installation & Usage
 
-To get started with PyCalc Pro, clone the repository, install the dependencies, and run the main script. All the commands you need are in this single, convenient block:
-
+### Option 1: Install from GitHub (Recommended)
+```bash
+pip install git+https://github.com/lw-xiong/pycalc-pro.git
+pycalc
+```
+### Option 2: Clone and Run
 ```bash
 git clone https://github.com/lw-xiong/pycalc-pro.git
 cd pycalc-pro
 pip install -r requirements.txt
 python calculator.py
 ```
+
 ---
 
 ## Author
