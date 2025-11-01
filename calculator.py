@@ -2,8 +2,11 @@
 # by Li Wen Xiong
 # A feature-rich math and sequence calculator with a clean menu-driven interface.
 
-import math, sys, time, functools, array
+import math
+import sys
+import time
 from colorama import init, Fore, Style
+import functools
 from functools import lru_cache
 
 # Increase max digits for large integers
@@ -32,13 +35,20 @@ init(autoreset=True)
 SQRT_CACHE = {}
 FACTORIAL_CACHE = {0: 1, 1: 1, 2: 2, 3: 6, 4: 24, 5: 120}
 PRIME_CACHE = {2: True, 3: True, 5: True, 7: True}
-FIBONACCI_PRECOMPUTED = array.array('Q', [0, 1])  # Unsigned long long
+# FIX: Use regular list instead of array for better compatibility
+FIBONACCI_PRECOMPUTED = [0, 1]
 
-# Precompute first 90 Fibonacci numbers at startup
-a, b = 0, 1
-for _ in range(88):  # Already have 2, need 88 more to total 90
-    a, b = b, a + b
-    FIBONACCI_PRECOMPUTED.append(a)
+# Precompute first 90 Fibonacci numbers at startup - FIXED
+def precompute_fibonacci():
+    """Precompute Fibonacci numbers at startup"""
+    a, b = 0, 1
+    for _ in range(88):  # Already have 2, need 88 more to total 90
+        a, b = b, a + b
+        FIBONACCI_PRECOMPUTED.append(b)
+
+print(Fore.YELLOW + "Precomputing Fibonacci sequence...", end="")
+precompute_fibonacci()
+print(Fore.GREEN + " Done!")
 
 # Common trigonometric values in degrees (0-360)
 TRIG_CACHE = {}
@@ -65,15 +75,23 @@ if HAS_NUMBA:
     @njit(fastmath=True, cache=True)
     def numba_fibonacci(n):
         a, b = 0, 1
-        result = array.array('Q', [0]) * n
+        result = [0] * n
         for i in range(n):
             result[i] = a
             a, b = b, a + b
         return result
 else:
     # Fallback to pure Python
-    def numba_is_prime(n): return is_prime(n)
-    def numba_fibonacci(n): return list(fibonacci_gen(n))
+    def numba_is_prime(n): 
+        return is_prime(n)
+    
+    def numba_fibonacci(n):
+        a, b = 0, 1
+        result = []
+        for _ in range(n):
+            result.append(a)
+            a, b = b, a + b
+        return result
 
 # =========================
 # BASIC OPERATIONS
@@ -82,11 +100,11 @@ def add(a, b): return a + b
 def subtract(a, b): return a - b
 def multiply(a, b): return a * b
 def divide(a, b): 
-    return "Error: Division by zero" if b == 0 else a * (1.0 / b)  # Faster than /
+    return "Error: Division by zero" if b == 0 else a / b
 
-# ==============================================
+# =========================
 # ADVANCED MATH FUNCTIONS (MAXIMUM OPTIMIZATION)
-# ==============================================
+# =========================
 def power(a, b): 
     # Special cases for common exponents
     if b == 2: return a * a
@@ -147,27 +165,31 @@ def tangent(a):
     return math.tan(angle_rad)
 
 def exponential(a): return math.exp(a)
-def absolute(a): return -a if a < 0 else a  # Faster than abs()
+def absolute(a): return abs(a)
 def modulus(a, b): return a % b
 
-# ================================================
+# =========================
 # SEQUENCES & NUMBER THEORY (EXTREME OPTIMIZATION)
-# ================================================
+# =========================
 MAX_FIB_TERMS = 90
 TERMS_PER_ROW = 5
 MAX_GEOM_VALUE = 1e100
 
 def fibonacci_gen(n):
     """Ultra-fast Fibonacci using precomputed values or JIT"""
+    # FIX: Simple and reliable Fibonacci generation
     if n <= len(FIBONACCI_PRECOMPUTED):
         return FIBONACCI_PRECOMPUTED[:n]
     elif HAS_NUMBA:
         return numba_fibonacci(n)
     else:
+        # Simple generator for larger sequences
         a, b = 0, 1
+        result = []
         for _ in range(n):
-            yield a
+            result.append(a)
             a, b = b, a + b
+        return result
 
 def arithmetic_sequence_gen(a1, d, n):
     """Vectorized if possible, otherwise optimized iteration"""
@@ -217,9 +239,10 @@ def is_prime(n):
                 PRIME_CACHE[n] = False
                 return False
             i += 6
+        result = True
     
-    PRIME_CACHE[n] = True
-    return True
+    PRIME_CACHE[n] = result
+    return result
 
 def prime_sequence(n):
     """Hybrid approach: sieve for large n, trial for small n"""
@@ -271,7 +294,8 @@ def simple_sieve_with_progress(n, limit):
     # Optimized sieve marking
     for i in range(2, int(limit**0.5) + 1):
         if sieve[i]:
-            sieve[i*i:limit+1:i] = bytearray(b'\x00') * ((limit - i*i) // i + 1)
+            for j in range(i*i, limit+1, i):
+                sieve[j] = 0
     
     # Yield primes with progress
     count = 0
@@ -328,19 +352,11 @@ def true_segmented_sieve(n, limit):
 # =========================
 def print_sequence(seq, name="Sequence", max_terms=100):
     """Ultra-fast sequence printing with batch processing"""
-    if hasattr(seq, '__array__') or hasattr(seq, '__len__'):
-        # Handle numpy arrays and lists efficiently
-        try:
-            seq_list = list(seq) if not hasattr(seq, '__array__') else seq.tolist()
-        except (TypeError, MemoryError):
-            seq_list = []
-            for i, item in enumerate(seq):
-                if i >= max_terms:
-                    print(Fore.RED + f"{name} too long to display ({i+1}+ terms). Please request <= {max_terms}.")
-                    return
-                seq_list.append(item)
+    # Handle different sequence types properly
+    if isinstance(seq, (list, tuple)):
+        seq_list = seq
     else:
-        # Handle generators
+        # Convert generators and other iterables to list
         seq_list = []
         try:
             for i, item in enumerate(seq):
@@ -348,13 +364,13 @@ def print_sequence(seq, name="Sequence", max_terms=100):
                     print(Fore.RED + f"{name} too long to display ({i+1}+ terms). Please request <= {max_terms}.")
                     return
                 seq_list.append(item)
-        except TypeError:
-            print(Fore.RED + f"Cannot display {name}")
+        except (TypeError, MemoryError) as e:
+            print(Fore.RED + f"Cannot display {name}: {e}")
             return
     
     total = len(seq_list)
-    if total > max_terms:
-        print(Fore.RED + f"{name} too long to display ({total} terms). Please request <= {max_terms}.")
+    if total == 0:
+        print(Fore.YELLOW + f"{name} is empty.")
         return
         
     print(Fore.CYAN + f"{name} (length {total}):")
@@ -403,9 +419,9 @@ def get_number(prompt, allow_float=True, max_val=None):
             print("\n" + Fore.YELLOW + "Input cancelled.")
             raise
 
-# ============================
-# MENU SYSTEM ( MAXIMUM SPEED)
-# ============================
+# ==================================================
+# MENU SYSTEM
+# ==================================================
 def print_header(title):
     width = 60
     print(Fore.CYAN + "╔" + "═"*(width-2) + "╗")
@@ -477,7 +493,9 @@ def sequences_menu():
                 if n > MAX_FIB_TERMS:
                     print(Fore.RED + f"Number too large! Max {MAX_FIB_TERMS}.")
                     continue
-                print_sequence(fibonacci_gen(n), "Fibonacci Sequence", max_terms=MAX_FIB_TERMS)
+                print(Fore.YELLOW + f"Generating {n} Fibonacci terms...")
+                fib_sequence = fibonacci_gen(n)
+                print_sequence(fib_sequence, "Fibonacci Sequence", max_terms=MAX_FIB_TERMS)
                 break
         elif choice in ["2","a","arithmetic sequence"]:
             a1 = get_number("First term: "); d = get_number("Difference: "); n = int(get_number("Number of terms: ", allow_float=False))
@@ -491,9 +509,9 @@ def sequences_menu():
         else:
             print(Fore.RED + "Invalid choice!")
 
-# =============
+# =========================
 # MAIN PROGRAM
-# =============
+# =========================
 def main():
     while True:
         print_header("Welcome to PyCalc Pro v1.1.0")
