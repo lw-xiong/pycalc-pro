@@ -1,6 +1,6 @@
-MIT License
+MIT License – Modified for PyCalc Pro
 
-Copyright (c) 2025 Li Wen Xiong (李文雄)
+Copyright (c) 2025 Li Wen Xiong (李文雄) – PyCalc Pro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -9,8 +9,13 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. The above copyright notice, this permission notice, and the name "PyCalc Pro"
+   and "Li Wen Xiong (李文雄)" must be included in all copies or substantial
+   portions of the Software, in source or binary form.
+
+2. If the Software is redistributed in executable or compiled form, the project name
+   "PyCalc Pro" and author name "Li Wen Xiong (李文雄)" must be visible
+   to end users in some form, such as a splash screen, console output, or "About" dialog.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
