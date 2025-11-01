@@ -1,11 +1,11 @@
-# PyCalc Pro v2.0.0
+# PyCalc Pro v1.1.0
 
 A feature-rich **command-line calculator** written in Python — supports **advanced math**, **sequences**, and **number theory** with a modular menu system and colorful terminal interface.
 
 ---
 
 ## Version Notes
-v2.0.0 — October 2025
+v1.1.0 — October 2025
 
 * Major optimization pass with caching and NumPy integration
 * Improved Fibonacci and prime generation performance (up to 16× faster)
