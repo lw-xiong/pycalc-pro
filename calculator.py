@@ -2,13 +2,9 @@
 # by Li Wen Xiong
 # A feature-rich math and sequence calculator with a clean menu-driven interface.
 
-import math
-import sys
-import time
+import math, sys, time, functools, array
 from colorama import init, Fore, Style
-import functools
 from functools import lru_cache
-import array
 
 # Increase max digits for large integers
 sys.set_int_max_str_digits(1000000)
@@ -88,9 +84,9 @@ def multiply(a, b): return a * b
 def divide(a, b): 
     return "Error: Division by zero" if b == 0 else a * (1.0 / b)  # Faster than /
 
-# =========================
+# ==============================================
 # ADVANCED MATH FUNCTIONS (MAXIMUM OPTIMIZATION)
-# =========================
+# ==============================================
 def power(a, b): 
     # Special cases for common exponents
     if b == 2: return a * a
@@ -154,9 +150,9 @@ def exponential(a): return math.exp(a)
 def absolute(a): return -a if a < 0 else a  # Faster than abs()
 def modulus(a, b): return a % b
 
-# =========================
+# ================================================
 # SEQUENCES & NUMBER THEORY (EXTREME OPTIMIZATION)
-# =========================
+# ================================================
 MAX_FIB_TERMS = 90
 TERMS_PER_ROW = 5
 MAX_GEOM_VALUE = 1e100
@@ -407,9 +403,9 @@ def get_number(prompt, allow_float=True, max_val=None):
             print("\n" + Fore.YELLOW + "Input cancelled.")
             raise
 
-# ==================================================
-# MENU SYSTEM (UNCHANGED FORMATTING - MAXIMUM SPEED)
-# ==================================================
+# ============================
+# MENU SYSTEM ( MAXIMUM SPEED)
+# ============================
 def print_header(title):
     width = 60
     print(Fore.CYAN + "╔" + "═"*(width-2) + "╗")
@@ -495,12 +491,12 @@ def sequences_menu():
         else:
             print(Fore.RED + "Invalid choice!")
 
-# =========================
-# MAIN PROGRAM (UNCHANGED)
-# =========================
+# =============
+# MAIN PROGRAM
+# =============
 def main():
     while True:
-        print_header("Welcome to PyCalc Pro v2.0")
+        print_header("Welcome to PyCalc Pro v1.1.0")
         print("1. Basic Operations (b)\n2. Advanced Math (a)\n3. Sequences & Number Theory (s)\n4. Exit (e)")
         choice = input(Fore.GREEN + "Choose a category: ").lower()
         if choice in ["1","b","basic operations"]: basic_menu()
@@ -514,4 +510,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
