@@ -2,11 +2,8 @@
 # by Li Wen Xiong
 # A feature-rich math and sequence calculator with a clean menu-driven interface.
 
-import math
-import sys
-import time
+import math, sys, time, functools
 from colorama import init, Fore, Style
-import functools
 from functools import lru_cache
 
 # Increase max digits for large integers
@@ -102,11 +99,10 @@ def multiply(a, b): return a * b
 def divide(a, b): 
     return "Error: Division by zero" if b == 0 else a / b
 
-# =========================
-# ADVANCED MATH FUNCTIONS (MAXIMUM OPTIMIZATION)
-# =========================
+# ========================
+# ADVANCED MATH FUNCTIONS 
+# ========================
 def power(a, b): 
-    # Special cases for common exponents
     if b == 2: return a * a
     if b == 0.5: return math.sqrt(a)
     if b == 1: return a
@@ -169,7 +165,7 @@ def absolute(a): return abs(a)
 def modulus(a, b): return a % b
 
 # =========================
-# SEQUENCES & NUMBER THEORY (EXTREME OPTIMIZATION)
+# SEQUENCES & NUMBER THEORY
 # =========================
 MAX_FIB_TERMS = 90
 TERMS_PER_ROW = 5
@@ -177,7 +173,6 @@ MAX_GEOM_VALUE = 1e100
 
 def fibonacci_gen(n):
     """Ultra-fast Fibonacci using precomputed values or JIT"""
-    # FIX: Simple and reliable Fibonacci generation
     if n <= len(FIBONACCI_PRECOMPUTED):
         return FIBONACCI_PRECOMPUTED[:n]
     elif HAS_NUMBA:
@@ -514,7 +509,7 @@ def sequences_menu():
 # =========================
 def main():
     while True:
-        print_header("Welcome to PyCalc Pro v1.1.0")
+        print_header("Welcome to PyCalc Pro v1.1.1")
         print("1. Basic Operations (b)\n2. Advanced Math (a)\n3. Sequences & Number Theory (s)\n4. Exit (e)")
         choice = input(Fore.GREEN + "Choose a category: ").lower()
         if choice in ["1","b","basic operations"]: basic_menu()
@@ -528,5 +523,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
