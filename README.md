@@ -1,11 +1,11 @@
-# PyCalc Pro v2.0.1
+# PyCalc Pro v2.0.2
 
 A high-performance **mathematical computing engine** written in Python — designed for **AI systems and scientific computing** with advanced mathematics, physics calculations, and sequence operations featuring multi-backend acceleration and memory optimization.
 
 ---
 
 ## Version Notes
-v2.0.1 — November 2025
+v2.0.2 — November 2025
 
 * **Performance Upgrade**: Optimizations with C++ extensions and GPU acceleration
 * **Multi-Backend Support**: C++, Numba JIT, and pure Python fallbacks
