@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pycalc-pro"
-version = "2.0.1"
+version = "2.0.2"
 description = "PyCalc Pro – High-performance AI math engine with physics, units, and sequence operations."
 authors = [
     { name = "Li Wen Xiong (李文雄)", email = "lwx.src@gmail.com" }
@@ -16,8 +16,7 @@ dependencies = [
     "numpy",
     "numba",
     "scipy",
-    "pint",
-    "cupy"
+    "pint"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -31,8 +30,14 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
+[project.optional-dependencies]
+gpu = ["cupy"]
+
 [project.urls]
 Homepage = "https://github.com/lw-xiong/pycalc-pro"
 
 [tool.setuptools]
 packages = ["core", "interface"]
+
+[project.scripts]
+pycalc = "interface.cli:main"
