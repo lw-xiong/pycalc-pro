@@ -83,7 +83,7 @@ pycalc-pro/
 
 ## Installation & Usage
 
-### Option 1: Install from PyPI full with GPU acceleration(Recommended)
+### Option 1: Install from PyPI with GPU acceleration(Recommended)
 ```bash
 pip install pycalc-pro[gpu]
 pycalc
