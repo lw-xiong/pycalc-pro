@@ -148,4 +148,4 @@ This project is licensed under the BSD 3-Clause License - see the LICENSE file f
 
 ---
 
-PyCalc Pro v2.0.1 — Optimized for Scientific Computing
+PyCalc Pro v2.0.2 — Optimized for Scientific Computing
