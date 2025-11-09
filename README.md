@@ -7,7 +7,7 @@ A high-performance **mathematical computing engine** written in Python — desig
 ## Version Notes
 v2.0.1 — November 2025
 
-* **Performance Upgrade**: Phase 3 optimizations with C++ extensions and GPU acceleration
+* **Performance Upgrade**: Optimizations with C++ extensions and GPU acceleration
 * **Multi-Backend Support**: C++, Numba JIT, and pure Python fallbacks
 * **Memory Optimization**: Advanced memory pooling for reduced allocations
 * **Expanded Modules**: Sequences, unit operations, and physics calculations
