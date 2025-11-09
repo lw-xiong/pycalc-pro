@@ -6,6 +6,7 @@ The following versions of this project are currently supported with security upd
 
 | Version | Supported          |
 | ------- | ------------------ |
+| 2.0.x   | :white_check_mark: |
 | 1.1.x   | :white_check_mark: |
 | 1.0.x   | :white_check_mark: |
 
