@@ -1,0 +1,95 @@
+Metadata-Version: 2.4
+Name: pycalc-pro
+Version: 2.0.0
+Summary: PyCalc Pro – High-performance AI math engine with physics, units, and sequence operations.
+Author-email: "Li Wen Xiong (李文雄)" <lwx.src@gmail.com>
+License-Expression: BSD-3-Clause
+Project-URL: Homepage, https://github.com/lw-xiong/pycalc-pro
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.21
+Requires-Dist: numba>=0.55
+Requires-Dist: scipy>=1.7
+Requires-Dist: pint>=0.18
+Dynamic: license-file
+
+# PyCalc Pro v1.1.1
+
+A feature-rich **command-line calculator** written in Python — supports **advanced math**, **sequences**, and **number theory** with a modular menu system and colorful terminal interface.
+
+---
+
+## Version Notes
+v1.1.1 — October 2025
+
+* Project Structure Update: Moved community files to .github/ folder for cleaner organization
+* Packaging Ready: Added pyproject.toml for modern Python distribution
+* Cleaner CLI with responsive progress bars
+* License Update: Modified MIT license terms
+* No Functional Changes: Calculator performance and features identical to v1.1.0
+
+---
+
+### Advanced Calculator Menus
+
+| Basic Operations | Advanced Math |
+| :---: | :---: |
+| ![Basic Operations](images/img2.jpg) | ![Advanced Math](images/img3.jpg) |
+
+| Sequences & Number Theory | Example Output |
+| :---: | :---: |
+| ![Sequences & Number Theory](images/img4.jpg) | ![Color-coded Output Example](images/img5.jpg) |
+
+---
+
+## Features
+
+* Basic arithmetic operations (add, subtract, multiply, divide)
+* Advanced math (power, square roots, trigonometry, logarithms)
+* Sequences and number theory functions
+* Modular menu-driven CLI interface
+* Color-coded output using colorama
+* Formatted tables using tabulate
+
+---
+
+## Installation & Usage
+
+### Option 1: Install from GitHub (Recommended)
+```bash
+pip install git+https://github.com/lw-xiong/pycalc-pro.git
+pycalc
+```
+### Option 2: Clone and Run
+```bash
+git clone https://github.com/lw-xiong/pycalc-pro.git
+cd pycalc-pro
+pip install -r requirements.txt
+python calculator.py
+```
+
+---
+
+## Author
+Li Wen Xiong (李文雄)
+GitHub: @lw-xiong
+
+---
+
+## License
+
+This project is licensed under the MIT License — you’re free to use, modify, and share it with credit.
+
+---
+
+PyCalc Pro — Smart. Fast. Powerful.

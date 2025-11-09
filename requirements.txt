@@ -1,4 +1,5 @@
-colorama
-tabulate
-functools
+numpy
 numba
+scipy
+pint
+cupy
