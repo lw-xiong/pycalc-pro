@@ -89,13 +89,19 @@ pip install pycalc-pro
 pycalc
 ```
 
-### Option 2: Install from GitHub
+### Option 2: Install from PyPI for GPU (Recommended)
+```bash
+pip install pycalc-pro[gpu]
+pycalc
+```
+
+### Option 3: Install from GitHub
 ```bash
 pip install git+https://github.com/lw-xiong/pycalc-pro.git
 pycalc
 ```
 
-### Option 3: Clone and Run
+### Option 4: Clone and Run
 ```bash
 git clone https://github.com/lw-xiong/pycalc-pro.git
 cd pycalc-pro
