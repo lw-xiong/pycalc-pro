@@ -111,7 +111,7 @@ pycalc
 
 ---
 
-## AI System Integration
+## AI System Integration Guide
 ```bash
 from pycalc_pro.core.math_ops import MathOperations
 from pycalc_pro.core.physics_ops import PhysicsOperations
