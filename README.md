@@ -1,151 +1,120 @@
-# PyCalc Pro v2.0.2
+# PyCalc Pro
 
-A high-performance computational engine in Python with advanced mathematics, physics, and vector operations, featuring multi-backend acceleration via C++ and GPU support for scientific and engineering applications.
+[![CI](https://img.shields.io/github/actions/workflow/status/lw-xiong/pycalc-pro/ci.yml?style=for-the-badge)](https://github.com/lw-xiong/pycalc-pro/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/badge/v2.1.0-2b2b2b?style=for-the-badge)](https://github.com/lw-xiong/pycalc-pro/releases)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-green?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/python-%3E%3D3.8-2b2b2b?style=for-the-badge&logo=python)](https://python.org)
 
----
+PyCalc Pro is a high-performance mathematical computing engine for Python. It provides
+arithmetic, transcendental, physics, unit-conversion, and sequence operations with a safe
+AST expression evaluator, batch processing, memory pooling, and optional Numba/GPU
+acceleration — designed to be simple to import and easy to integrate into AI workflows.
 
-## Version Notes
-v2.0.2 — November 2025
+## What changed in this release
 
-* **Performance Upgrade**: Optimizations with C++ extensions and GPU acceleration
-* **Multi-Backend Support**: C++, Numba JIT, and pure Python fallbacks
-* **Memory Optimization**: Advanced memory pooling for reduced allocations
-* **Expanded Modules**: Sequences, unit operations, and physics calculations
-* **License Change**: Updated to BSD 3-Clause license
-* **Code Quality**: Fixed Numba signatures and consistent error handling
+The previous version was published with broken packaging (`core`/`interface` as separate
+top-level packages, missing `utils`), a phantom C++ shared library that crashed on import,
+and GPU/C++ API calls that didn't match the shipped accelerator. This release:
 
----
+- Repackages everything under one importable `pycalc_pro` package.
+- Replaces the unshipped C++ bridge with working NumPy fallbacks (no crash, no phantom `.so`).
+- Aligns the GPU/C++ call sites with the actual accelerator API.
+- Wires the full math and physics surface through the `PyCalcAI` interface.
+- Fixes the Fibonacci sequence generator (was appending the wrong term).
+- Adds a pytest suite (70 tests) and CI on every push/PR to `main`.
 
-## Features
+## Install
 
-### Core Mathematical Operations
-* **Basic Arithmetic**: Optimized addition, subtraction, multiplication, division
-* **Advanced Functions**: Power, roots, logarithms, exponentials
-* **Trigonometric Functions**: Sine, cosine, tangent with degree support
-* **Special Functions**: Factorial, modulus, absolute value
-* **Batch Processing**: Parallel execution for large datasets
-
-### Physics Engine
-* **Classical Mechanics**: Kinetic energy, potential energy, centripetal force
-* **Relativity**: Time dilation, length contraction, relativistic gamma
-* **Quantum Mechanics**: de Broglie wavelength, Schwarzschild radius
-* **Thermodynamics**: Ideal gas law calculations
-* **Projectile Motion**: Range calculations with custom gravity
-
-### Sequence & Number Theory
-* **Mathematical Sequences**: Fibonacci, arithmetic, geometric progressions
-* **Prime Operations**: Prime checking, factorization, prime generation
-* **Combinatorics**: Permutations, combinations, factorial operations
-* **Series Calculations**: Summation, product sequences
-
-### Unit Operations
-* **Unit Conversion**: Comprehensive unit system support
-* **Dimensional Analysis**: Automatic unit validation and conversion
-* **Physical Constants**: Extensive library of scientific constants
-
-### Performance Optimizations
-* **C++ Extensions**: Critical operations accelerated with C++
-* **GPU Acceleration**: CUDA support for large batch operations
-* **Memory Pooling**: Reduced allocation overhead
-* **Numba JIT**: Just-in-time compilation for numerical functions
-* **Smart Backend Selection**: Automatic optimization based on operation size
-* **Error Handling**: Comprehensive validation and error codes
-
----
-
-## Architecture
 ```bash
-pycalc-pro/
-├── core/ # Core mathematical engines
-│ ├── math_ops.py # Phase 3 optimized math operations
-│ ├── calculator.py # Main calculator engine
-│ ├── physics_ops.py # Physics calculations
-│ ├── sequences.py # Sequence and number theory
-│ ├── unit_ops.py # Unit operations and conversions
-│ ├── cpp_bridge.py # C++ extensions interface
-│ ├── cpp_extensions.cpp # C++ acceleration code
-│ ├── gpu_accelerator.py # GPU acceleration
-│ └── performance.py # Performance monitoring
-├── interface/ # User interfaces
-│ ├── cli.py # Command-line interface
-│ └── ai_interface.py # Interface for AI systems
-├── utils/ # Support utilities
-│ ├── cache.py # Intelligent caching system
-│ ├── memory_pool.py # Memory optimization
-│ ├── constants.py # Physical and mathematical constants
-│ └── evaluator.py # Expression evaluation
-├── examples/ # Usage examples
-│ └── ai_usage.py # AI system integration examples
-└── dist/ # Distribution files
-```
-
----
-
-## Installation & Usage
-
-### Option 1: Install from PyPI with GPU acceleration(Recommended)
-```bash
-pip install pycalc-pro[gpu]
-pycalc
-```
-
-### Option 2: Install from PyPI CPU only
-```bash
-pip install pycalc-pro
-pycalc
-```
-
-### Option 3: Install from GitHub
-```bash
-pip install git+https://github.com/lw-xiong/pycalc-pro.git
-pycalc
-```
-
-### Option 4: Clone and Run
-```bash
+# From source (recommended)
 git clone https://github.com/lw-xiong/pycalc-pro.git
 cd pycalc-pro
 pip install -e .
 pycalc
+
+# Or straight from GitHub
+pip install git+https://github.com/lw-xiong/pycalc-pro.git
 ```
 
----
+Optional accelerators (the engine falls back to plain NumPy/Python without them):
 
-## AI System Integration Guide
 ```bash
-from pycalc_pro.core.math_ops import MathOperations
-from pycalc_pro.core.physics_ops import PhysicsOperations
-
-# High-performance math for AI systems
-math_engine = MathOperations()
-result = math_engine.power(2, 10)  # 1024
-
-# Physics calculations for scientific AI
-physics_engine = PhysicsOperations()
-ke = physics_engine.kinetic_energy(10, 5)  # 125 J
+pip install "pycalc-pro[numba]"   # Numba JIT for numerical kernels
+pip install "pycalc-pro[gpu]"     # CuPy GPU acceleration (CUDA required)
 ```
 
----
+`pyproject.toml` declares `numpy`, `scipy`, and `pint` as runtime dependencies;
+`numba` and `cupy` are optional.
 
-## Performance Features
-* Memory Optimization: Reduced allocations via memory pooling
-* Multi-Backend: Automatic selection of C++ → Numba → Python backends
-* Batch Processing: Parallel execution for large-scale computations
-* Error Safety: Comprehensive error codes and validation
-* GPU Support: Optional CUDA acceleration for large datasets
+## Quick start
 
----
+```python
+from pycalc_pro import PyCalcAI
 
-## Author
-Li Wen Xiong (李文雄)
-GitHub: @lw-xiong
+c = PyCalcAI()
 
----
+# Safe expression evaluation
+print(c.compute("2 + 3 * 4"))            # 14
+
+# Mathematics
+print(c.power(2, 10))                    # 1024.0
+print(c.sqrt(16))                        # 4.0
+print(c.exp(1))                          # 2.718...
+print(c.factorial(5))                    # 120
+print(c.logarithm(100, 10))              # 2.0
+print(c.sin(90), c.cos(60), c.tan(45))   # 1.0 0.5 1.0
+print(c.mod(10, 3), c.abs(-7))           # 1.0 7.0
+print(c.nth_root(27, 3))                 # 3.0
+
+# Physics
+print(c.kinetic_energy(10, 5))           # 125.0
+print(c.relativistic_gamma(149896229))   # ~1.1547 (at 0.5 c)
+print(c.time_dilation(1, 149896229))     # > 1
+print(c.schwarzschild_radius(5.9722e24)) # ~0.00887 m (Earth)
+
+# Unit conversions (requires pint)
+print(c.convert_units(100, "kg", "lb"))  # ~220.46
+
+# Sequences
+print(c.fibonacci(8))                    # [0, 1, 1, 2, 3, 5, 8, 13]
+print(c.prime_sequence(6))               # [2, 3, 5, 7, 11, 13]
+
+# Batch
+print(c.batch_power([2, 3, 4], [2, 3, 2]))  # [4.0, 27.0, 16.0]
+```
+
+## CLI
+
+```bash
+pycalc compute "2 + 3 * 4"
+pycalc math power 2 10
+pycalc physics kinetic_energy 10 20
+pycalc units 100 kg lb
+pycalc sequence fibonacci 8
+```
+
+## Backends
+
+| Capability | Default | Optional accelerator |
+|---|---|---|
+| Scalar math | NumPy/Python | Numba JIT |
+| Batch math | NumPy | Numba / CuPy GPU |
+| Physics | NumPy/Python | — |
+| Units | Pint | — |
+
+When Numba/CuPy/C++ aren't installed, every operation still works through the NumPy
+fallback — no hard crash, no phantom shared library.
+
+## Tests & CI
+
+```bash
+python -m pytest tests/
+```
+
+70 tests cover math, physics, units, sequences, the safe evaluator, and the calculator
+engine. CI runs the suite on Python 3.8 / 3.10 / 3.12 / 3.13 on every push and pull
+request to `main`.
 
 ## License
 
-This project is licensed under the BSD 3-Clause License - see the LICENSE file for details.
-
----
-
-PyCalc Pro v2.0.2 — Optimized for Scientific Computing
+BSD 3-Clause. See `LICENSE`.

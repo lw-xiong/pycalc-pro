@@ -9,7 +9,7 @@ from typing import Union, List, Dict, Any, Callable, Tuple, Optional
 # Phase 3 Optimizations
 try:
     from ..core.cpp_bridge import global_cpp_bridge
-    HAS_CPP_EXTENSIONS = True
+    HAS_CPP_EXTENSIONS = global_cpp_bridge._lib is not None
 except ImportError:
     HAS_CPP_EXTENSIONS = False
     global_cpp_bridge = None

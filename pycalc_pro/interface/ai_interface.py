@@ -9,7 +9,7 @@ from ..core.physics_ops import PhysicsOperations
 from ..core.unit_ops import UnitOperations
 from ..core.sequences import SequenceOperations
 from ..utils.evaluator import SafeEvaluator
-from ..core.performance import PerformanceMonitor as perf_monitor
+from ..core.performance import perf_monitor
 
 class PyCalcAI:
     """
@@ -103,7 +103,31 @@ class PyCalcAI:
         result = self.math.tan(degrees)
         self.engine.set_last_result(result)
         return result
-    
+
+    @perf_monitor.time_it
+    def exp(self, x: float) -> Union[float, str]:
+        result = self.math.exp(x)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def abs(self, x: float) -> Union[float, str]:
+        result = self.math.abs(x)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def mod(self, a: float, b: float) -> Union[float, str]:
+        result = self.math.mod(a, b)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def nth_root(self, a: float, n: float) -> Union[float, str]:
+        result = self.math.nth_root(a, n)
+        self.engine.set_last_result(result)
+        return result
+
     # === PHYSICS OPERATIONS ===
     @perf_monitor.time_it
     def kinetic_energy(self, mass: float, velocity: float) -> Union[float, str]:
@@ -128,7 +152,43 @@ class PyCalcAI:
         result = self.physics.projectile_range(initial_velocity, angle_degrees, gravity)
         self.engine.set_last_result(result)
         return result
-    
+
+    @perf_monitor.time_it
+    def relativistic_gamma(self, velocity: float) -> Union[float, str]:
+        result = self.physics.relativistic_gamma(velocity)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def length_contraction(self, proper_length: float, velocity: float) -> Union[float, str]:
+        result = self.physics.length_contraction(proper_length, velocity)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def schwarzschild_radius(self, mass: float) -> Union[float, str]:
+        result = self.physics.schwarzschild_radius(mass)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def de_broglie_wavelength(self, momentum: float) -> Union[float, str]:
+        result = self.physics.de_broglie_wavelength(momentum)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def centripetal_force(self, mass: float, velocity: float, radius: float) -> Union[float, str]:
+        result = self.physics.centripetal_force(mass, velocity, radius)
+        self.engine.set_last_result(result)
+        return result
+
+    @perf_monitor.time_it
+    def ideal_gas_law(self, pressure=None, volume=None, temperature=None, moles=None) -> Union[float, str]:
+        result = self.physics.ideal_gas_law(pressure, volume, temperature, moles)
+        self.engine.set_last_result(result)
+        return result
+
     # === UNIT CONVERSIONS ===
     @perf_monitor.time_it
     def convert_units(self, value: float, from_unit: str, to_unit: str) -> Union[float, str]:
@@ -206,12 +266,22 @@ class PyCalcAI:
             'compute(expression)',
             'power(base, exponent)',
             'sqrt(x)',
+            'exp(x)',
             'factorial(n)',
             'logarithm(x, base)',
+            'abs(x)',
+            'mod(a, b)',
+            'nth_root(a, n)',
             'sin(degrees)', 'cos(degrees)', 'tan(degrees)',
             'kinetic_energy(mass, velocity)',
             'potential_energy(mass, height, gravity)',
+            'relativistic_gamma(velocity)',
             'time_dilation(proper_time, velocity)',
+            'length_contraction(proper_length, velocity)',
+            'schwarzschild_radius(mass)',
+            'de_broglie_wavelength(momentum)',
+            'centripetal_force(mass, velocity, radius)',
+            'ideal_gas_law(pressure, volume, temperature, moles)',
             'projectile_range(velocity, angle, gravity)',
             'convert_units(value, from_unit, to_unit)',
             'fibonacci(n)',
@@ -248,7 +318,7 @@ class PyCalcAI:
         """Get help information for AI integration"""
         return {
             "description": "PyCalc Pro - High-performance math/physics engine for AI",
-            "version": "1.0.0",
+            "version": "2.1.0",
             "features": [
                 "Mathematical operations with Numba optimization",
                 "Physics calculations with relativistic effects",

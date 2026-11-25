@@ -9,7 +9,7 @@ from functools import wraps
 # Phase 3 Optimizations
 try:
     from ..core.cpp_bridge import global_cpp_bridge
-    HAS_CPP_EXTENSIONS = True
+    HAS_CPP_EXTENSIONS = global_cpp_bridge._lib is not None
 except ImportError:
     HAS_CPP_EXTENSIONS = False
     global_cpp_bridge = None
@@ -358,11 +358,11 @@ class PhysicsOperations:
     
     def _cpp_relativistic_gamma(self, velocity: float) -> Tuple[float, int]:
         """C++ accelerated relativistic gamma"""
+        c = self.constants['c']
         try:
-            c = self.constants['c']
             return self.cpp.relativistic_gamma(velocity, c)
         except:
-            return self._python_ultra_gamma(velocity)
+            return self._python_ultra_gamma(velocity, c)
     
     def _cpp_batch_kinetic_energy(self, masses: np.ndarray, velocities: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """C++ accelerated batch kinetic energy"""
@@ -383,15 +383,13 @@ class PhysicsOperations:
             return float('inf'), self.ERROR_OVERFLOW
         return result, 0
     
-    def _python_ultra_gamma(self, velocity: float) -> Tuple[float, int]:
+    def _python_ultra_gamma(self, velocity: float, c: float) -> Tuple[float, int]:
         """Python fallback relativistic gamma with error codes"""
-        c = self.constants['c']
-        
         if velocity < 0.0:
             return float('nan'), self.ERROR_NEGATIVE
         if velocity >= c:
             return float('inf'), self.ERROR_LIGHTSPEED
-        
+
         v_c = velocity / c
         return 1.0 / math.sqrt(1.0 - v_c ** 2), 0
     
@@ -405,24 +403,21 @@ class PhysicsOperations:
             return float('nan'), self.ERROR_OVERFLOW
         return result, 0
     
-    def _python_ultra_schwarzschild(self, mass: float) -> Tuple[float, int]:
+    def _python_ultra_schwarzschild(self, mass: float, G: float, c: float) -> Tuple[float, int]:
         """Python fallback Schwarzschild radius with error codes"""
         if mass < 0.0:
             return float('nan'), self.ERROR_NEGATIVE
-        
-        G = self.constants['G']
-        c = self.constants['c']
+
         result = 2.0 * G * mass / (c ** 2)
         if math.isinf(result) or math.isnan(result):
             return float('nan'), self.ERROR_OVERFLOW
         return result, 0
-    
-    def _python_ultra_de_broglie(self, momentum: float) -> Tuple[float, int]:
+
+    def _python_ultra_de_broglie(self, momentum: float, h: float) -> Tuple[float, int]:
         """Python fallback de Broglie wavelength with error codes"""
         if momentum <= 0.0:
             return float('nan'), self.ERROR_NEGATIVE
-        
-        h = self.constants['h']
+
         result = h / momentum
         if math.isinf(result) or math.isnan(result):
             return float('nan'), self.ERROR_OVERFLOW

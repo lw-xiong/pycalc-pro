@@ -73,11 +73,11 @@ class MathOperations:
             self._setup_python_fallbacks()
         
         # Setup GPU acceleration if available
-        if self.gpu and hasattr(self.gpu, 'get_gpu_status'):
-            gpu_status = self.gpu.get_gpu_status()
+        if self.gpu and hasattr(self.gpu, 'get_accelerator_status'):
+            gpu_status = self.gpu.get_accelerator_status()
             if gpu_status.get('gpu_available', False):
-                print("PHASE 3: GPU acceleration available for batch operations")
-                self._gpu_batch_power = self.gpu.gpu_batch_power
+                print("GPU acceleration available for batch operations")
+                self._gpu_batch_power = self.gpu.gpu_math_power
             else:
                 self._gpu_batch_power = None
         else:
@@ -757,7 +757,7 @@ class MathOperations:
         """Phase 3 optimized exponential"""
         validation_error = self._validate_numeric_input(x)
         if validation_error:
-            return validation_error
+            return f"Error: {validation_error}"
         try:
             result, error_code = self._ultra_exp(float(x))
             
@@ -1188,7 +1188,7 @@ class MathOperations:
     
     def get_optimization_status(self) -> dict:
         """Return Phase 3 optimization status"""
-        gpu_status = self.gpu.get_gpu_status() if self.gpu else {"gpu_available": False}
+        gpu_status = self.gpu.get_accelerator_status() if self.gpu else {"gpu_available": False}
         
         return {
             "phase": 3,

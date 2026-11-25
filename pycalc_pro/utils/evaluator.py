@@ -90,3 +90,11 @@ class SafeEvaluator:
                 raise ValueError(f"Unknown variable: {node.id}")
         else:
             raise ValueError(f"Unsupported expression type: {type(node)}")
+
+    def get_cache_info(self) -> dict:
+        """Cache information for the safe evaluator (no-op cache, kept for interface parity)."""
+        return {
+            "safe_functions": len(self.safe_functions),
+            "safe_constants": len(self.safe_constants),
+            "cached": False,
+        }

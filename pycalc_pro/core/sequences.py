@@ -30,7 +30,7 @@ class SequenceOperations:
                 a, b = self._fibonacci_cache[-2], self._fibonacci_cache[-1]
                 for _ in range(len(self._fibonacci_cache), 100):
                     a, b = b, a + b
-                    self._fibonacci_cache.append(a)
+                    self._fibonacci_cache.append(b)
     
     def fibonacci(self, n: int) -> List[int]:
         """Generate Fibonacci sequence with caching - RETURNS LIST"""
@@ -49,7 +49,7 @@ class SequenceOperations:
                 result = self._fibonacci_cache.copy()
                 for _ in range(len(self._fibonacci_cache), n):
                     a, b = b, a + b
-                    result.append(a)
+                    result.append(b)
                 self._fibonacci_cache = result
                 return result  # Returns list
     
