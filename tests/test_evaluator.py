@@ -27,6 +27,17 @@ def test_evaluate_power():
     assert ev.safe_eval("2 ** 10") == 1024
 
 
+def test_evaluate_factorial_function():
+    ev = SafeEvaluator(_engine())
+    assert ev.safe_eval("factorial(5)") == 120
+
+
+def test_evaluate_log_with_base():
+    ev = SafeEvaluator(_engine())
+    assert ev.safe_eval("log(100, 10)") == 2.0
+    assert ev.safe_eval("log(100)") == 2.0
+
+
 def test_evaluate_functions_degrees():
     ev = SafeEvaluator(_engine())
     assert ev.safe_eval("sin(90)") == 1.0

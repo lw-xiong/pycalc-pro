@@ -24,11 +24,12 @@ class SafeEvaluator:
             'sin': lambda x: math.sin(math.radians(x)),
             'cos': lambda x: math.cos(math.radians(x)),
             'tan': lambda x: math.tan(math.radians(x)),
-            'log': math.log10,
+            'log': lambda x, base=10: math.log(x, base),
             'ln': math.log,
             'exp': math.exp,
             'abs': abs,
             'fact': self._safe_factorial,
+            'factorial': self._safe_factorial,
             'pow': pow,
         }
         

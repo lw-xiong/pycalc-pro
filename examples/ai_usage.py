@@ -15,7 +15,7 @@ def demonstrate_ai_usage():
     
     # Example 1: Mathematical reasoning
     print("=== MATHEMATICAL REASONING ===")
-    result1 = calc.compute("2^8 + factorial(5) - sqrt(144)")
+    result1 = calc.compute("2**8 + factorial(5) - sqrt(144)")
     print(f"Complex calculation: {result1}")
     
     # Example 2: Physics problem solving
